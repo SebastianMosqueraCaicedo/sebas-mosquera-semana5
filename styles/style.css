@@ -32,16 +32,19 @@ h1 {
 	width: 100%;
 	max-width: 320px;
 	height: 60px;
-	background-color: #F0F0F0;
+	background-color: #010101;
 	margin: auto;
 
 	cursor: pointer;
 	user-select: none;
+	border: 1px solid;
+	border-color: #F0F0F0;
+	border-bottom-style: none;
 	border-radius: 9% / 36% 36% 0 0;
 }
 
 .date-picker:hover {
-	background-color: #D3D3D3;
+	background-color: #0D0D0D;
 }
 
 .date-picker .selected-date {
@@ -52,8 +55,8 @@ h1 {
 	justify-content: center;
 	align-items: center;
 
-	color: #313131;
-	font-size: 28px;
+	color: #A1A1A1;
+	font-size: 20px;
 }
 
 .date-picker .dates {
@@ -69,6 +72,11 @@ h1 {
 .date-picker .dates.active {
 	display: block;
 	padding: 10px;
+
+	background-color: #010101;
+	border: 1px dotted;
+	border-color: #F0F0F0;
+	border-bottom-style: none;
 	border-radius: 0 0 9% 9%;
 }
 
@@ -77,6 +85,7 @@ h1 {
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 2px solid #EEE;
+	color: #A1A1A1;
 }
 
 .date-picker .dates .month .arrows {
@@ -85,12 +94,12 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: #313131;
+	color: #A1A1A1;
 	font-size: 20px;
 }
 
 .date-picker .dates .month .arrows:hover {
-	background-color: #F3F3F3;
+	background-color: #414141;
 }
 
 .date-picker .dates .month .arrows:active {
@@ -107,7 +116,7 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: #313131;
+	color: #A1A1A1;
 }
 
 .date-picker .dates .days .day.selected-first {
@@ -129,20 +138,20 @@ h1 {
 
 @keyframes select-main {
 	from {
-		background-color: #F0FDF0;
+		background-color: #01a000;
 	}
 
 	to {
-		background-color: #99FA99;
+		background-color: #01b001;
 	}
 }
 
 @keyframes select-inside {
 	from {
-		background-color: #F9FFF9;
+		background-color: #010a01;
 	}
 
 	to {
-		background-color: #F9FFF9;
+		background-color: #010D01;
 	}
 }
