@@ -18,9 +18,15 @@ let month = date.getMonth();
 let year = date.getFullYear();
 
 let selectedDate = date;
-let selectedDay = day;
+let selectedDay = [
+	{day: day, month: month, year: year},
+	{day: 1, month: month, year: year}
+];
+
 let selectedMonth = month;
 let selectedYear = year;
+
+let insideArray = [0];
 
 mth_element.textContent = months[month] + ' ' + year;
 
@@ -69,18 +75,47 @@ function populateDates(e) {
 		amount_days = 28;
 	}
 
+        if (month === 3) {
+		amount_days = 30;
+	}
+
+        if (month === 5) {
+		amount_days = 30;
+	}
+
+        if (month === 8) {
+		amount_days = 30;
+	}
+
+        if (month === 10) {
+		amount_days = 30;
+	}
+
 	for (let i = 0; i < amount_days; i++) {
 		const day_element = document.createElement('div');
 		day_element.classList.add('day');
 		day_element.textContent = i + 1;
 
-		if (selectedDay === (i + 1) && selectedYear == year && selectedMonth === month) {
-			day_element.classList.add('selected');
+		// selects the outher ranges of the interval
+		if (selectedDay[1].day === (i + 1) && selectedDay[1].year === year && selectedDay[1].month === month) {
+			day_element.classList.add('selected-first');
 		}
+
+		if (selectedDay[0].day === (i + 1) && selectedDay[0].year === year && selectedDay[0].month === month) {
+			day_element.classList.add('selected-last');
+		}
+
 
 		day_element.addEventListener('click', function () {
 			selectedDate = new Date(year + '-' + (month + 1) + '-' + (i + 1));
-			selectedDay = (i + 1);
+			let actDay = i + 1;
+			selectedDay.unshift({day: actDay, month: month, year: year});
+			insideArray = [];
+			// the days inside the selected day interval
+			for (let l = 1; l < (selectedDay[0].day - selectedDay[1].day); l++) {
+				let rangeStart = selectedDay[1].day + l;
+				insideArray.push({day: rangeStart, month: month, year: year});
+			}
 			selectedMonth = month;
 			selectedYear = year;
 
@@ -89,9 +124,27 @@ function populateDates(e) {
 
 			populateDates();
 		});
+		let inArrayLength = insideArray.length;
+		if (inArrayLength != 0){
+
+			for (let k = 0; k < inArrayLength; k++) {
+				if (insideArray[k].day === (i + 1) && selectedDay[0].month === selectedDay[0].month) {
+					day_element.classList.add('selected-inside');
+				}
+			}
+		}
+
+			if (selectedDay[1].month < selectedMonth && selectedDay[1].day < i) {
+					day_element.classList.add('selected-inside');
+				console.log(i);
+				console.log('month ',selectedDay[1].month);
+				console.log('day ',selectedDay[1].day);
+			}
 
 		days_element.appendChild(day_element);
+//		console.log(insideArray);
 	}
+
 }
 
 // HELPER FUNCTIONS
